@@ -1,9 +1,14 @@
-import React, {useState,useEffect} from 'react';
+import React, {useState,useEffect,useContext} from 'react';
 import {Pagination} from "@material-ui/lab";
-import usePagination from "./Pagination";
+import {useRedirect} from '../Hooks/useRedirect';
+import usePagination from "../Hooks/Pagination";
 import './productList.css'
+import ProductContext from '../Contexts/ProductContext'
 
 const ProductList = ()=> {
+    const ProductDetailCxt = useContext(ProductContext)
+    const redirect = useRedirect();
+
     const [productList, setProductList] = useState([])
     let [page, setPage] = useState(1);
     const Per_Page = 10;
@@ -30,10 +35,10 @@ const ProductList = ()=> {
     }
     
   
-    const PintarProducto = ({name,brand,image,price,relevance}) =>{
+    const PintarProducto = ({name,brand,image,price,relevance, onClick}) =>{
         if(relevance === 1){
             return (
-            <div id="Container">
+            <div id="Container" onClick={onClick}>
                 <div>
                      <div id="circle"></div>
                     <img id="imgP" src={image} alt={`${name}`}  />
@@ -54,7 +59,7 @@ const ProductList = ()=> {
         }
         else if(relevance === 2){
             return (
-                <div id="Container">
+                <div id="Container" onClick={onClick}>
                     <div>
                         <div id="circle"></div>
                         <img id="imgP" src={image} alt={`${name}`}  />
@@ -74,7 +79,7 @@ const ProductList = ()=> {
         }
         else if (relevance === 3){
             return(
-                <div id="Container">
+                <div id="Container" onClick={onClick}>
                     <div>
                         <div id="circle"></div>
                         <img id="imgP" src={image} alt={`${name}`}  />
@@ -99,7 +104,15 @@ const ProductList = ()=> {
             const {id,name,brand,image,price,relevance}=product
             return (
                 <div key={id} id={id} >
-                    <PintarProducto brand={brand} name={name} price={price} image={image} relevance={relevance}/>
+                    <PintarProducto 
+                     onClick={(e)=>{
+                        console.log("entra")
+                        redirect("/productDetail",e)
+                        ProductDetailCxt.setProductId({ 
+                            ...ProductDetailCxt,id
+                        });    
+                    }}
+                    brand={brand} name={name} price={price} image={image} relevance={relevance}/>
 
                 </div >
             )

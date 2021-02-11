@@ -82,6 +82,7 @@ server.get("/productDetails", (req, res) => {
                 res.send(err);
             }
             if(result){
+             
                 const ProductDetails = {
                     "name": result[0].name,
                     "brand": result[0].brand,

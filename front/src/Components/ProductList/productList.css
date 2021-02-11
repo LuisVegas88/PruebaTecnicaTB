@@ -1,18 +1,28 @@
+p,h1,h2,h3,img{
+  margin-left:50px;
+}
 #stars
 {
   height:50px;
   width:200px;
   margin:auto;
-  margin-top:100px;
+  margin-top:10px;
+  position:relative;
+  left:170px;
+  top:-160px;
+ 
+ 
 }
 .fa
 {
-  font-size:30px !important;
+  
+  font-size:20px !important;
   cursor:pointer;
 }
 .checked
 {
-  color:red;
+ 
+  color:rgb(28, 238, 192);
 }
 .unchecked
 {
@@ -20,6 +30,7 @@
 }
 .btn
 {
+
   width:150px;
   height:20px;
   
@@ -31,5 +42,5 @@
 
 
 #imgP{
-  height: 100px;
+  height: 150px;
 }
